@@ -56,10 +56,6 @@ Example : !aslayid STEAM_0:0:1234567 2 RDMing a traitor
 
 Damagelog.Enable_Autoslay = true
 
--- Force autoslain players to be innocents (overrides SelectRoles)
-
-Damagelog.Autoslay_ForceRole = false
-
 -- Default autoslay reason
 
 Damagelog.Autoslay_DefaultReason = "No reason specified"
