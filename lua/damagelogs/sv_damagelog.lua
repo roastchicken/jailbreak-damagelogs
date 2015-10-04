@@ -71,7 +71,7 @@ function Damagelog:CheckDamageTable()
 	end
 end
 
-function Damagelog:TTTBeginRound()
+function Damagelog:JailBreakRoundStart()
 	self.Time = 0
 	if not timer.Exists("Damagelog_Timer") then
 		timer.Create("Damagelog_Timer", 1, 0, function()
@@ -103,8 +103,8 @@ function Damagelog:TTTBeginRound()
 		}
 	end
 end
-hook.Add("TTTBeginRound", "TTTBeginRound_Damagelog", function()
-	Damagelog:TTTBeginRound()
+hook.Add("JailBreakRoundStart", "JailBreakRoundStart_Damagelog", function()
+	Damagelog:JailBreakRoundStart()
 end)
 
 -- rip from TTT
