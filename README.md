@@ -1,6 +1,5 @@
-TTTDamagelogs
+jailbreak-damagelogs
 =============
 
-Damagelogs for Trouble in Terrorist Town (a Garry's Mod gamemode)
-
-http://facepunch.com/showthread.php?t=1416843
+Damagelogs for Excl's Jailbreak 7
+based off Tommy228's TTTDamagelogs (http://facepunch.com/showthread.php?t=1416843)
