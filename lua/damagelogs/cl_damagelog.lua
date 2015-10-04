@@ -27,7 +27,7 @@ include("damagelogs/sh_chat.lua")
 include("damagelogs/cl_chat.lua")
 
 local outdated = false
-http.Fetch("https://api.github.com/repos/Tommy228/TTTDamagelogs/contents/version.md?ref=master", function(body)
+http.Fetch("https://api.github.com/repos/thatoneprogrammerkid/jailbreak-damagelogs/contents/version.md?ref=master", function(body)
 	local content = util.JSONToTable(body)
 	if not content then return end
 	local version = content.content
