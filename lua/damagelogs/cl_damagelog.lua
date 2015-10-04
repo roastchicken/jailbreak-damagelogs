@@ -108,7 +108,7 @@ function Damagelog:OpenMenu()
 	end
 	if outdated then
 		local info = vgui.Create("Damagelog_InfoLabel", self.Menu);
-		info:SetText("Server owners : this version is outdated! You can get the latest one on http://github.com/Tommy228/TTTDamagelogs");
+		info:SetText("Server owners : this version is outdated! You can get the latest one on http://github.com/thatoneprogrammerkid/jailbreak-damagelogs");
 		info:SetInfoColor("blue");
 		info:SetPos(5,30);
 		info:SetSize(x-10, 25);		
