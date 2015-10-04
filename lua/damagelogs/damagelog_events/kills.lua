@@ -17,9 +17,9 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 		scene = Damagelog.SceneID
 		local tbl = { 
 			[1] = attacker:Nick(), 
-			[2] = attacker:GetRole(), 
+			[2] = attacker:Team(), 
 			[3] = ply:Nick(), 
-			[4] = ply:GetRole(), 
+			[4] = ply:Team(), 
 			[5] = Damagelog:WeaponFromDmg(dmginfo),
 			[6] = ply:SteamID(),
 			[7] = attacker:SteamID(),
@@ -33,7 +33,7 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 		end
 		if GetRoundState() == ROUND_ACTIVE then
 			net.Start("DL_Ded")
-			if tbl[2] == ROLE_TRAITOR and (tbl[4] == ROLE_INNOCENT or tbl[4] == ROLE_DETECTIVE) then
+			if tbl[2] == TEAM_PRISOER and tbl[4] == TEAM_GUARD then
 				net.WriteUInt(0,1)
 			else
 				net.WriteUInt(1,1)
@@ -48,9 +48,9 @@ end
 function event:ToString(v)
 
 	local weapon = Damagelog.weapon_table[v[5]] or v[5]
-	text = string.format("%s [%s] killed %s [%s] with an unknown weapon", v[1], Damagelog:StrRole(v[2]), v[3], Damagelog:StrRole(v[4])) 
+	text = string.format("%s [%s] killed %s [%s] with an unknown weapon", v[1], Damagelog:StrTeam(v[2]), v[3], Damagelog:StrTeam(v[4])) 
 	if weapon then
-		text = string.format("%s [%s] killed %s [%s] with %s", v[1], Damagelog:StrRole(v[2]), v[3], Damagelog:StrRole(v[4]), weapon)
+		text = string.format("%s [%s] killed %s [%s] with %s", v[1], Damagelog:StrTeam(v[2]), v[3], Damagelog:StrTeam(v[4]), weapon)
 	end
 	return text
 	

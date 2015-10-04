@@ -17,7 +17,7 @@ function event:Initialize()
 			v.CreateGrenade = function(gren, src, ang, vel, angimp, ply)
 				local tbl = {
 					[1] = gren.Owner:Nick(),
-					[2] = gren.Owner:GetRole(),
+					[2] = gren.Owner:Team(),
 					[3] = gren:GetClass(),
 					[4] = gren.Owner:SteamID()
 				}
@@ -30,7 +30,7 @@ end
 
 function event:ToString(v)
 	local weapon = Damagelog.weapon_table[v[3]] or tostring(v[3])
-	return string.format("%s [%s] threw %s", v[1], Damagelog:StrRole(v[2]), weapon) 
+	return string.format("%s [%s] threw %s", v[1], Damagelog:StrTeam(v[2]), weapon) 
 end
 
 function event:IsAllowed(tbl)

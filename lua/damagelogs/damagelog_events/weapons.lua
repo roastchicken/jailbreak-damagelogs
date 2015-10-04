@@ -14,7 +14,7 @@ event.Type = "WEP"
 function event:TTTOrderedEquipment(ply, ent, is_item)
 	self.CallEvent({
 		[1] = ply:Nick(),
-		[2] = ply:GetRole(),
+		[2] = ply:Team(),
 		[3] = ply:SteamID(),
 		[4] = is_item,
 		[5] = ent
@@ -39,7 +39,7 @@ function event:ToString(v)
 			weapon = event.Equips[weapon]
 		end
 	end
-	return string.format("%s [%s] bought %s", v[1], Damagelog:StrRole(v[2]), weapon) 
+	return string.format("%s [%s] bought %s", v[1], Damagelog:StrTeam(v[2]), weapon) 
 end
 
 function event:IsAllowed(tbl)

@@ -53,7 +53,7 @@ timer.Create("SpecDM_Recording", 0.2, 0, function()
 				sequence = v:GetSequence(),
 				hp = v:Health(),
 				wep = IsValid(wep) and wep:GetClass() or "<no wep>",
-				role = v:GetRole()
+				team = v:Team()
 			}
 			if IsValid(wep) and wep:GetClass() == "weapon_zm_carry" and IsValid(wep.EntHolding) then
 				local found = false

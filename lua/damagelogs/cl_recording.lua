@@ -264,7 +264,7 @@ hook.Add("HUDPaint", "Scene_Record", function()
 				surface.SetTextPos(pos.x - w/2, pos.y)
 				surface.DrawText(wep)
 				local _, healthcolor = util.HealthToString(model.hp or 100)
-				nick = nick.." ["..Damagelog:StrRole(model.role).."]"
+				nick = nick.." ["..Damagelog:StrTeam(model.team).."]"
 				local w2,h2 = surface.GetTextSize(nick)
 				surface.SetTextColor(healthcolor)
 				surface.SetTextPos(pos.x - w2/2, pos.y - h2 - 5)
@@ -380,7 +380,7 @@ hook.Add("Think", "Think_Record", function()
 				if not v.corpse then
 					models[k] = ClientsideModel(mdl, RENDERGROUP_TRANSLUCENT)
 					models[k]:AddEffects(EF_NODRAW)
-					models[k].role = v.role
+					models[k].team = v.team
 				else
 					models[k] = { corpse = true }
 				end

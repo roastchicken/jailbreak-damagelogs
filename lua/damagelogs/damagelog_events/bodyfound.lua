@@ -12,16 +12,16 @@ event.Type = "BODY"
 function event:TTTBodyFound(ply, deadply, rag)
 	self.CallEvent({
 		[1] = (IsValid(ply) and ply:Nick() or "<Disconnected Player>"),
-		[2] = (IsValid(ply) and ply:GetRole() or "disconnected"),
+		[2] = (IsValid(ply) and ply:Team() or "disconnected"),
 		[3] = (IsValid(ply) and ply:SteamID() or "<Disconnected Player>"),
 		[4] = (IsValid(deadply) and deadply:Nick() or CORPSE.GetPlayerNick(rag, "<Disconnected Player>")),
-		[5] = (IsValid(deadply) and deadply:GetRole() or "disconnected"),
+		[5] = (IsValid(deadply) and deadply:Team() or "disconnected"),
 		[6] = (IsValid(deadply) and deadply:SteamID() or "<Disconnected Player>")
 	})
 end
 
 function event:ToString(v)
-	return string.format("%s [%s] identified the body of %s [%s]", v[1], Damagelog:StrRole(v[2]), v[4], Damagelog:StrRole(v[5]))
+	return string.format("%s [%s] identified the body of %s [%s]", v[1], Damagelog:StrTeam(v[2]), v[4], Damagelog:StrTeam(v[5]))
 end
 
 function event:IsAllowed(tbl)

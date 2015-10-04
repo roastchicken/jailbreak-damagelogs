@@ -25,6 +25,7 @@ AddCSLuaFile("damagelogs/sh_rdm_manager.lua")
 AddCSLuaFile("damagelogs/cl_chat.lua")
 AddCSLuaFile("damagelogs/sh_chat.lua")
 
+include("damagelogs/sv_util.lua")
 include("damagelogs/config/config.lua")
 include("damagelogs/sh_sync_entity.lua")
 include("damagelogs/sh_privileges.lua")
@@ -50,7 +51,7 @@ end
 
 util.AddNetworkString("DL_AskDamagelog")
 util.AddNetworkString("DL_SendDamagelog")
-util.AddNetworkString("DL_SendRoles")
+util.AddNetworkString("DL_SendTeams")
 util.AddNetworkString("DL_RefreshDamagelog")
 util.AddNetworkString("DL_InformSuperAdmins")
 util.AddNetworkString("DL_Ded")
@@ -58,7 +59,7 @@ util.AddNetworkString("DL_Ded")
 Damagelog.DamageTable = Damagelog.DamageTable or {}
 Damagelog.old_tables = Damagelog.old_tables or {}
 Damagelog.ShootTables = Damagelog.ShootTables or {}
-Damagelog.Roles = Damagelog.Roles or {}
+Damagelog.Teams = Damagelog.Teams or {}
 
 if not file.IsDir("damagelog", "DATA") then
 	file.CreateDir("damagelog")
@@ -86,9 +87,9 @@ function Damagelog:TTTBeginRound()
 			self.add_old = true
 		end
 		self.ShootTables[rounds + 1] = {}
-		self.Roles[rounds + 1] = {}
+		self.Teams[rounds + 1] = {}
 		for k,v in pairs(player.GetAll()) do
-			self.Roles[rounds+1][v:Nick()] = v:GetRole()
+			self.Teams[rounds+1][v:Nick()] = Damagelog:Team( v )
 		end
 		self.CurrentRound = rounds + 1
 	end
@@ -98,7 +99,7 @@ function Damagelog:TTTBeginRound()
 		self.OldLogsInfos[v:Nick()] = {
 			steamid = v:SteamID(),
 			steamid64 = v:SteamID64(),
-			role = v:GetRole()
+			team = Damagelog:Team( v )
 		}
 	end
 end
@@ -151,7 +152,7 @@ function Damagelog:SendDamagelog(ply, round)
 		ply:PrintMessage(HUD_PRINTTALK, "Warning : Damagelogs MySQL connection error. The error has been saved on data/damagelog/mysql_error.txt")
 	end
 	local damage_send
-	local roles = self.Roles[round]
+	local teams = self.Teams[round]
 	local current = false
 	if round == -1 then
 		if not self.last_round_map then return end
@@ -163,9 +164,9 @@ function Damagelog:SendDamagelog(ply, round)
 					local encoded = data[1]["UNCOMPRESS(damagelog)"]
 					local decoded = util.JSONToTable(encoded)
 					if not decoded then
-						decoded = { roles = {}, DamageTable = {"empty"} }
+						decoded = { teams = {}, DamageTable = {"empty"} }
 					end
-					self:TransferLogs(decoded.DamageTable, ply, round, decoded.roles)
+					self:TransferLogs(decoded.DamageTable, ply, round, decoded.teams)
 				end
 			end
 			query:start()
@@ -174,9 +175,9 @@ function Damagelog:SendDamagelog(ply, round)
 			if not query then return end
 			local decoded = util.JSONToTable(query)
 			if not decoded then
-				decoded = { roles = {}, DamageTable = {"empty"} }
+				decoded = { teams = {}, DamageTable = {"empty"} }
 			end
-			self:TransferLogs(decoded.DamageTable, ply, round, decoded.roles)		
+			self:TransferLogs(decoded.DamageTable, ply, round, decoded.teams)		
 		end
 	elseif round == self:GetSyncEnt():GetPlayedRounds() then
 		if not ply:CanUseDamagelog() then return end
@@ -188,12 +189,12 @@ function Damagelog:SendDamagelog(ply, round)
 	if not damage_send then 
 		damage_send = { "empty" } 
 	end
-	self:TransferLogs(damage_send, ply, round, roles, current)
+	self:TransferLogs(damage_send, ply, round, teams, current)
 end
 
-function Damagelog:TransferLogs(damage_send, ply, round, roles, current)
-	net.Start("DL_SendRoles")
-	net.WriteTable(roles or {})
+function Damagelog:TransferLogs(damage_send, ply, round, teams, current)
+	net.Start("DL_SendTeams")
+	net.WriteTable(teams or {})
 	net.Send(ply)
 	local count = #damage_send
 	for k,v in ipairs(damage_send) do

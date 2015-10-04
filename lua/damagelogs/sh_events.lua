@@ -67,12 +67,8 @@ if SERVER then
 	
 end
 
-function Damagelog:IsTeamkill(role1, role2)
-	if role1 == role2 then 
-		return true
-	elseif role1 == ROLE_DETECTIVE and role2 == ROLE_INNOCENT then 
-		return true
-	elseif role1 == ROLE_INNOCENT and role2 == ROLE_DETECTIVE then 
+function Damagelog:IsTeamkill(team1, team2)
+	if team1 == team2 then 
 		return true
 	end
 	return false

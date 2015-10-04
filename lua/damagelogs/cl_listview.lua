@@ -132,33 +132,33 @@ function Damagelog:SetListViewTable(listview, tbl, nofilters, old)
 	end
 end
 
-function Damagelog:SetRolesListView(listview, tbl)
+function Damagelog:SetTeamsListView(listview, tbl)
 	listview:Clear()
 	if not tbl then return end
 	for k,v in pairs(tbl) do
-		if not GetConVar("ttt_dmglogs_showinnocents"):GetBool() and v == ROLE_INNOCENT then continue end
-		self:AddRoleLine(listview, k, v)
+		if not GetConVar("ttt_dmglogs_showinnocents"):GetBool() and v == TEAM_PRISONER then continue end
+		self:AddTeamLine(listview, k, v)
 	end
 end
 
-local role_colors = {
-	[0] = Color(0, 200, 0),
+local team_colors = {
 	[1] = Color(200, 0, 0),
-	[2] = Color(0, 0, 200)
+	[2] = Color(0, 0, 200),
+  [3] = Color(200, 200, 0)
 }
 
-function Damagelog:AddRoleLine(listview, nick, role)
-	local item = listview:AddLine(nick, self:StrRole(role), "")
+function Damagelog:AddTeamLine(listview, nick, team)
+	local item = listview:AddLine(nick, self:StrTeam(team), "")
 	function item:PaintOver()
 		for k,v in pairs(item.Columns) do
-			v:SetTextColor(role_colors[role])
+			v:SetTextColor(team_colors[team])
 		end
 	end
 	item.Nick = nick
 	item.Round = self.SelectedRound
 	local sync_ent = self:GetSyncEnt()
 	item.Think = function(panel)
-		local ent = self.RoleNicks and self.RoleNicks[panel.Nick]
+		local ent = self.TeamNicks and self.TeamNicks[panel.Nick]
 		if GetRoundState() == ROUND_ACTIVE and sync_ent:GetPlayedRounds() == panel.Round then
 			if IsValid(ent) then
 				panel:SetColumnText(3, ent:Alive() and not (ent.IsGhost and ent:IsGhost()) and not ent:IsSpec() and "Yes" or "No")

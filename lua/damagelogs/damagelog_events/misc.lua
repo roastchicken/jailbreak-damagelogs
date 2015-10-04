@@ -40,7 +40,7 @@ if SERVER then
 					event.CallEvent({
 						[1] = 7,
 						[2] = bomb.Owner:Nick(),
-						[3] = bomb.Owner:GetRole(),
+						[3] = bomb.Owner:Team(),
 						[4] = bomb.Owner:SteamID()
 					})
 				end
@@ -62,7 +62,7 @@ function event:TTTC4Disarm(ply, result, bomb)
 	self.CallEvent({
 		[1] = 4,
 		[2] = ply:Nick(),
-		[3] = ply:GetRole(),
+		[3] = ply:Team(),
 		[4] = ply:SteamID(),
 		[5] = name,
 		[6] = result
@@ -74,7 +74,7 @@ function event:TTTC4Pickup(ply, bomb)
 	self.CallEvent({
 		[1] = 6,
 		[2] = ply:Nick(),
-		[3] = ply:GetRole(),
+		[3] = ply:Team(),
 		[4] = ply:SteamID(),
 		[5] = name
 	})
@@ -85,7 +85,7 @@ function event:TTTC4Destroyed(ply, bomb)
 	self.CallEvent({
 		[1] = 5,
 		[2] = ply:Nick(),
-		[3] = ply:GetRole(),
+		[3] = ply:Team(),
 		[4] = ply:SteamID(),
 		[5] = name
 	})
@@ -118,7 +118,7 @@ function event:TTTPlayerDisguised(ply, enabled)
 					self.CallEvent({
 						[1] = 3,
 						[2] = ply:Nick(),
-						[3] = ply:GetRole(),
+						[3] = ply:Team(),
 						[4] = ply:SteamID()
 					})
 					timer.Destroy(timername)
@@ -134,7 +134,7 @@ function event:TTTPlayerDisguised(ply, enabled)
 	self.CallEvent({
 		[1] = 1,
 		[2] = ply:Nick(),
-		[3] = ply:GetRole(),
+		[3] = ply:Team(),
 		[4] = ply:SteamID(),
 		[5] = enabled
 	})
@@ -148,7 +148,7 @@ function event:Initialize()
 				self.CallEvent({
 					[1] = 2,
 					[2] = wep.Owner:Nick(),
-					[3] = wep.Owner:GetRole(),
+					[3] = wep.Owner:Team(),
 					[4] = wep.Owner:SteamID()
 				})
 				if old_func then
@@ -164,19 +164,19 @@ end
 function event:ToString(v)
 	local text
 	if v[1] == 1 then
-		return string.format("%s [%s] %s their disguiser", v[2], Damagelog:StrRole(v[3]), v[5] and "enabled" or "disabled")
+		return string.format("%s [%s] %s their disguiser", v[2], Damagelog:StrTeam(v[3]), v[5] and "enabled" or "disabled")
 	elseif v[1] == 2 then
-		return string.format("%s [%s] teleported", v[2], Damagelog:StrRole(v[3]))
+		return string.format("%s [%s] teleported", v[2], Damagelog:StrTeam(v[3]))
 	elseif v[1] == 3 then
-		return string.format("%s [%s] is spamming their disguiser. Disguise logging will be stopped.", v[2], Damagelog:StrRole(v[3]))
+		return string.format("%s [%s] is spamming their disguiser. Disguise logging will be stopped.", v[2], Damagelog:StrTeam(v[3]))
 	elseif v[1] == 4 then
-		return string.format("%s [%s] disarmed the C4 of %s %s success.", v[2], Damagelog:StrRole(v[3]), v[5], v[6] and "with" or "without")
+		return string.format("%s [%s] disarmed the C4 of %s %s success.", v[2], Damagelog:StrTeam(v[3]), v[5], v[6] and "with" or "without")
 	elseif v[1] == 5 then
-		return string.format("%s [%s] destroyed the C4 of %s.", v[2], Damagelog:StrRole(v[3]), v[5])
+		return string.format("%s [%s] destroyed the C4 of %s.", v[2], Damagelog:StrTeam(v[3]), v[5])
 	elseif v[1] == 6 then
-		return string.format("%s [%s] picked up the C4 of %s.", v[2], Damagelog:StrRole(v[3]), v[5])
+		return string.format("%s [%s] picked up the C4 of %s.", v[2], Damagelog:StrTeam(v[3]), v[5])
 	elseif v[1] == 7 then
-		return string.format("%s [%s] planted or dropped a C4", v[2], Damagelog:StrRole(v[3]))
+		return string.format("%s [%s] planted or dropped a C4", v[2], Damagelog:StrTeam(v[3]))
 	end
 end
 

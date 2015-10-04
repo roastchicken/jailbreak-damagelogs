@@ -17,7 +17,7 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 		local scene = Damagelog.SceneID
 		local tbl = { 
 			[1] = ply:Nick(), 
-			[2] = ply:GetRole(), 
+			[2] = ply:Team(), 
 			[3] = ply:SteamID(),
 			[4] = scene
 		} 
@@ -36,7 +36,7 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 end
 
 function event:ToString(v)
-	return string.format("<something/world> killed %s [%s]", v[1], Damagelog:StrRole(v[2]), v[3]) 
+	return string.format("<something/world> killed %s [%s]", v[1], Damagelog:StrTeam(v[2]), v[3]) 
 end
 
 function event:IsAllowed(tbl)

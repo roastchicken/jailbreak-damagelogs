@@ -13,7 +13,7 @@ event.Type = "RADIO"
 function event:TTTPlayerRadioCommand(ply, msg_name, msg_target)
 
 	local name
-	local name_role = false
+	local name_team = false
 	local target_steamid = false
 
 	if isstring(msg_target) then
@@ -22,23 +22,23 @@ function event:TTTPlayerRadioCommand(ply, msg_name, msg_target)
 		if IsValid(msg_target) then
 			if msg_target:IsPlayer() then
 				name = msg_target:Nick()
-				name_role = msg_target:GetRole()
+				name_team = msg_target:Team()
 				target_steamid = msg_target:SteamID()
 			elseif msg_target:GetClass() == "prop_ragdoll" then
 				name = "corpse of "
 				name = name..CORPSE.GetPlayerNick(msg_target, "<Disconnected Player>")
-				name_role = "disconnected"
+				name_team = "disconnected"
 			end
 		end
 	end
 
 	self.CallEvent({
 		[1] = (IsValid(ply) and ply:Nick() or "<Disconnected Retriever>"),
-		[2] = (IsValid(ply) and ply:GetRole() or "disconnected"),
+		[2] = (IsValid(ply) and ply:Team() or "disconnected"),
 		[3] = (IsValid(ply) and ply:SteamID() or "<Disconnected Retriever>"),
 		[4] = msg_name,
 		[5] = name,
-		[6] = name_role,
+		[6] = name_team,
 		[7] = target_steamid
 	})
 end
@@ -67,12 +67,12 @@ function event:ToString(v)
 		text = util.Capitalize(text)
 	end
 	
-	local targetrole = ""
+	local targetteam = ""
 	if targetply then
-		targetrole = " ["..Damagelog:StrRole(v[6]).."]"
+		targetteam = " ["..Damagelog:StrTeam(v[6]).."]"
 	end
 
-	return string.format("%s [%s] used their radio: %s%s", v[1], Damagelog:StrRole(v[2]), text, targetrole)
+	return string.format("%s [%s] used their radio: %s%s", v[1], Damagelog:StrTeam(v[2]), text, targetteam)
 end
 
 function event:IsAllowed(tbl)

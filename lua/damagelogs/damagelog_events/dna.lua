@@ -18,10 +18,10 @@ function event:TTTFoundDNA(ply, dna_owner, ent)
 	end
 	self.CallEvent({
 		[1] = (IsValid(ply) and ply:Nick() or "<Disconnected Retriever>"),
-		[2] = (IsValid(ply) and ply:GetRole() or "disconnected"),
+		[2] = (IsValid(ply) and ply:Team() or "disconnected"),
 		[3] = (IsValid(ply) and ply:SteamID() or "<Disconnected Retriever>"),
 		[4] = (IsValid(dna_owner) and dna_owner:Nick() or "<Disconnected Victim>"),
-		[5] = (IsValid(dna_owner) and dna_owner:GetRole() or "disconnected"),
+		[5] = (IsValid(dna_owner) and dna_owner:Team() or "disconnected"),
 		[6] = (IsValid(dna_owner) and dna_owner:SteamID() or "<Disconnected Victim>"),
 		[7] = name
 	})
@@ -29,7 +29,7 @@ end
 
 function event:ToString(v)
 	local ent = Damagelog.weapon_table[v[7]] or tostring(v[7])
-	return string.format("%s [%s] has retrieved the DNA of %s [%s] from %s's body", v[1], Damagelog:StrRole(v[2]), v[4], Damagelog:StrRole(v[5]), ent)
+	return string.format("%s [%s] has retrieved the DNA of %s [%s] from %s's body", v[1], Damagelog:StrTeam(v[2]), v[4], Damagelog:StrTeam(v[5]), ent)
 end
 
 function event:IsAllowed(tbl)

@@ -144,7 +144,7 @@ function Damagelog:DrawOldLogs()
 	self.PlayerList:SetHeight(130)
 	self.PlayerList:AddColumn("Player")
 	self.PlayerList:AddColumn("SteamID")
-	self.PlayerList:AddColumn("Role")
+	self.PlayerList:AddColumn("Team")
 	player_info:AddItem(self.PlayerList)
 	panel_list:AddItem(player_info)
 	
@@ -319,7 +319,7 @@ net.Receive("DL_SendOldLog", function()
 					if data.Infos then
 						Damagelog.PlayerList:Clear()
 						for k,v in pairs(data.Infos) do
-							local item = Damagelog.PlayerList:AddLine(k, v.steamid, Damagelog:StrRole(v.role))
+							local item = Damagelog.PlayerList:AddLine(k, v.steamid, Damagelog:StrTeam(v.team))
 							item.steamid = v.steamid
 							item.OnRightClick = function()
 								local copy = DermaMenu()

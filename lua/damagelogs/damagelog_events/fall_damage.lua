@@ -19,7 +19,7 @@ function event:EntityTakeDamage(ent, dmginfo)
 		if math.floor(damages) > 0 then
 			local tbl = { 
 				[1] = ent:Nick(), 
-				[2] = ent:GetRole(), 
+				[2] = ent:Team(), 
 				[3] = math.Round(damages), 
 				[4] = ent:SteamID()
 			}
@@ -27,7 +27,7 @@ function event:EntityTakeDamage(ent, dmginfo)
 			if push and math.max(push.t or 0, push.hurt or 0) > CurTime() - 4 then
 				tbl[5] = true
 				tbl[6] = push.att:Nick()
-				tbl[7] = push.att:GetRole()
+				tbl[7] = push.att:Team()
 				tbl[8] = push.att:SteamID()
 				self.CallEvent(tbl)
 			else
@@ -55,9 +55,9 @@ function event:EntityTakeDamage(ent, dmginfo)
 end
 
 function event:ToString(tbl)
-	local t = string.format("%s [%s] fell and lost %s HP", tbl[1], Damagelog:StrRole(tbl[2]), tbl[3]) 	
+	local t = string.format("%s [%s] fell and lost %s HP", tbl[1], Damagelog:StrTeam(tbl[2]), tbl[3]) 	
 	if tbl[5] then
-		t = t.." after being pushed by "..tbl[6].. " ["..Damagelog:StrRole(tbl[7]).."]"
+		t = t.." after being pushed by "..tbl[6].. " ["..Damagelog:StrTeam(tbl[7]).."]"
 	end
 	return t
 end

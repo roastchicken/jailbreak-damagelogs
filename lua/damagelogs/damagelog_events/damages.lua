@@ -31,9 +31,9 @@ function event:PlayerTakeRealDamage(ent, dmginfo, original_dmg)
 		if math.floor(original_dmg) > 0 then
 			local tbl = { 
 				[1] = ent:Nick(), 
-				[2] = ent:GetRole(), 
+				[2] = ent:Team(), 
 				[3] = att:Nick(), 
-				[4] = att:GetRole(), 
+				[4] = att:Team(), 
 				[5] = math.Round(dmginfo:GetDamage()), 
 				[6] = Damagelog:WeaponFromDmg(dmginfo), 
 				[7] = ent:SteamID(), 
@@ -84,7 +84,7 @@ function event:ToString(tbl)
 
 	local weapon = Damagelog.weapon_table[tbl[6]] or tbl[6]
 	local karma_reduced = tbl[5] < tbl[9]
-	local str = string.format("%s [%s] has damaged %s [%s] for %s", tbl[3], Damagelog:StrRole(tbl[4]), tbl[1], Damagelog:StrRole(tbl[2]), tbl[5]) 
+	local str = string.format("%s [%s] has damaged %s [%s] for %s", tbl[3], Damagelog:StrTeam(tbl[4]), tbl[1], Damagelog:StrTeam(tbl[2]), tbl[5]) 
 	if karma_reduced then
 		str = str .. string.format(" (%s)", tbl[9])
 	end

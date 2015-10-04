@@ -3,7 +3,7 @@ CreateClientConVar("ttt_dmglogs_showinnocents", "0", true, true)
 
 cvars.AddChangeCallback("ttt_dmglogs_showinnocents", function(name, old, new)
 	if IsValid(Damagelog.Menu) then
-		Damagelog:SetRolesListView(Damagelog.Roles, Damagelog.CurrentRoles)
+		Damagelog:SetTeamsListView(Damagelog.Teams, Damagelog.CurrentTeams)
 	end
 end)
 
@@ -216,26 +216,26 @@ function Damagelog:DrawDamageTab(x, y)
 			
 	table.insert(forms, self.DamageInfoBox)
 			
-	self.RoleInfos = vgui.Create("DForm", self.PanelOptions)
-	self.RoleInfos:SetName("Roles")
-	self.Roles = vgui.Create("DListView")
-	self.Roles:AddColumn("Player")
-	self.Roles:AddColumn("Role")
-	self.Roles:AddColumn("Alive?")
-	self.Roles:SetHeight(90)
-	self.RoleInfos:AddItem(self.Roles)	
-	self.PanelOptions:AddItem(self.RoleInfos)
-	self.RoleInfos:SetHeight(350)
-	self.RoleInfos:SetExpanded(false)
+	self.TeamInfos = vgui.Create("DForm", self.PanelOptions)
+	self.TeamInfos:SetName("Teams")
+	self.Teams = vgui.Create("DListView")
+	self.Teams:AddColumn("Player")
+	self.Teams:AddColumn("Team")
+	self.Teams:AddColumn("Alive?")
+	self.Teams:SetHeight(90)
+	self.TeamInfos:AddItem(self.Teams)	
+	self.PanelOptions:AddItem(self.TeamInfos)
+	self.TeamInfos:SetHeight(350)
+	self.TeamInfos:SetExpanded(false)
 
-	local show_innocents = vgui.Create("DCheckBoxLabel", self.RoleInfos)
+	local show_innocents = vgui.Create("DCheckBoxLabel", self.TeamInfos)
 	show_innocents:SetPos(465, 3)
 	show_innocents:SetText("Show innocent players")
 	show_innocents:SetTextColor(color_white)
 	show_innocents:SetConVar("ttt_dmglogs_showinnocents")
 	show_innocents:SizeToContents()
 	
-	table.insert(forms, self.RoleInfos)
+	table.insert(forms, self.TeamInfos)
 			
 	for k,v in pairs(forms) do
 		local old_toggle = v.Toggle
@@ -380,16 +380,16 @@ function Damagelog:FinishedLoading()
 	self:SetListViewTable(self.Damagelog, self.loading)
 end
 
-function Damagelog:ReceiveRoles(tbl)
+function Damagelog:ReceiveTeams(tbl)
 	if not IsValid(self.Menu) then return end
-	self.CurrentRoles = tbl
-	self:SetRolesListView(self.Roles, tbl)
+	self.CurrentTeams = tbl
+	self:SetTeamsListView(self.Teams, tbl)
 end
-net.Receive("DL_SendRoles", function()
+net.Receive("DL_SendTeams", function()
 	local tbl = net.ReadTable()
-	Damagelog.RoleNicks = {}
+	Damagelog.TeamNicks = {}
 	for k,v in pairs(player.GetAll()) do
-		Damagelog.RoleNicks[v:Nick()] = v
+		Damagelog.TeamNicks[v:Nick()] = v
 	end
 	if IsValid(Damagelog.Menu) then
 		Damagelog.Highlighted = {}
@@ -399,8 +399,8 @@ net.Receive("DL_SendRoles", function()
 		Damagelog.PlayersCombo.Players = tbl
 		Damagelog.PlayersCombo:Update()
 	end
-	Damagelog:ReceiveRoles(tbl)
-	Damagelog.RoleEnts = {}
+	Damagelog:ReceiveTeams(tbl)
+	Damagelog.TeamEnts = {}
 end)
 
 net.Receive("DL_SendDamageInfos", function()
