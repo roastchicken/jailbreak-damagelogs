@@ -25,7 +25,6 @@ AddCSLuaFile("damagelogs/sh_rdm_manager.lua")
 AddCSLuaFile("damagelogs/cl_chat.lua")
 AddCSLuaFile("damagelogs/sh_chat.lua")
 
-include("damagelogs/sv_util.lua")
 include("damagelogs/config/config.lua")
 include("damagelogs/sh_sync_entity.lua")
 include("damagelogs/sh_privileges.lua")
