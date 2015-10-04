@@ -159,8 +159,8 @@ hook.Add("Think", "Think_Damagelog", function()
 end)
 
 function Damagelog:StrTeam(team)
-	if team == TEAM_SPECTATOR then return "traitor"
-	elseif team == TEAM_GUARD then return "detective"
+	if team == TEAM_SPECTATOR then return "spectator"
+	elseif team == TEAM_GUARD then return "guard"
 	elseif team == TEAM_PRISONER then return "prisoner"
 	else return "disconnected" end
 end
