@@ -1,4 +1,5 @@
 AddCSLuaFile("damagelogs/cl_damagelog.lua")
+AddCSLuaFile("vgui/coloredbox.lua")
 AddCSLuaFile("damagelogs/cl_tabs/damagetab.lua")
 AddCSLuaFile("damagelogs/cl_tabs/settings.lua")
 AddCSLuaFile("damagelogs/cl_tabs/shoots.lua")
