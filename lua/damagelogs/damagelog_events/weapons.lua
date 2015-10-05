@@ -21,16 +21,6 @@ function event:TTTOrderedEquipment(ply, ent, is_item)
 	})
 end
 
-if CLIENT then
-	hook.Add("Initialize", "Damagelog_InitializeEventWeapon", function()
-		event.Equips = {
-			[EQUIP_RADAR] = "a radar",
-			[EQUIP_ARMOR] = "a set of body armor",
-			[EQUIP_DISGUISE] = "a disguiser"
-		}
-	end)
-end
-
 function event:ToString(v)
 	local weapon = Damagelog.weapon_table[v[5]] or tostring(v[5])
 	if tonumber(weapon) then
