@@ -89,7 +89,7 @@ function Damagelog:JailBreakRoundStart()
 		self.ShootTables[rounds + 1] = {}
 		self.Teams[rounds + 1] = {}
 		for k,v in pairs(player.GetAll()) do
-			self.Teams[rounds+1][v:Nick()] = Damagelog:Team( v )
+			self.Teams[rounds+1][v:Nick()] = v:Team()
 		end
 		self.CurrentRound = rounds + 1
 	end
@@ -99,7 +99,7 @@ function Damagelog:JailBreakRoundStart()
 		self.OldLogsInfos[v:Nick()] = {
 			steamid = v:SteamID(),
 			steamid64 = v:SteamID64(),
-			team = Damagelog:Team( v )
+			team = v:Team()
 		}
 	end
 end
