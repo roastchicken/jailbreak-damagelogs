@@ -11,7 +11,7 @@ function Damagelog:shootCallback(weapon)
 	local nick = (IsValid(owner) and owner.Nick and owner:Nick() or "NoOwner")
 	local class = (IsValid(weapon) and weapon:GetClass() or "NoClass")
 	local info = {nick, class}
-	if ( JB.State == STATE_PLAYING or JB.State == STATE_LASTREQUEST ) then
+	if ( JB.State == STATE_SETUP or JB.State == STATE_PLAYING or JB.State == STATE_LASTREQUEST ) then
 		if !self.ShootTables[self.CurrentRound][self.Time] then
 			self.ShootTables[self.CurrentRound][self.Time] =  {}
 		end
