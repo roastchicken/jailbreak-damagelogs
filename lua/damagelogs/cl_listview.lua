@@ -136,7 +136,7 @@ function Damagelog:SetTeamsListView(listview, tbl)
 	listview:Clear()
 	if not tbl then return end
 	for k,v in pairs(tbl) do
-		if not GetConVar("ttt_dmglogs_showinnocents"):GetBool() and v == TEAM_PRISONER then continue end
+		if not GetConVar("dmglogs_showprisoners"):GetBool() and v == TEAM_PRISONER then continue end
 		self:AddTeamLine(listview, k, v)
 	end
 end

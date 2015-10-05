@@ -1,7 +1,7 @@
 
-CreateClientConVar("ttt_dmglogs_showinnocents", "0", true, true)
+CreateClientConVar("dmglogs_showprisoners", "0", true, true)
 
-cvars.AddChangeCallback("ttt_dmglogs_showinnocents", function(name, old, new)
+cvars.AddChangeCallback("dmglogs_showprisoners", function(name, old, new)
 	if IsValid(Damagelog.Menu) then
 		Damagelog:SetTeamsListView(Damagelog.Teams, Damagelog.CurrentTeams)
 	end
@@ -230,9 +230,9 @@ function Damagelog:DrawDamageTab(x, y)
 
 	local show_innocents = vgui.Create("DCheckBoxLabel", self.TeamInfos)
 	show_innocents:SetPos(465, 3)
-	show_innocents:SetText("Show innocent players")
+	show_innocents:SetText("Show prisoners")
 	show_innocents:SetTextColor(color_white)
-	show_innocents:SetConVar("ttt_dmglogs_showinnocents")
+	show_innocents:SetConVar("dmglogs_showprisoners")
 	show_innocents:SizeToContents()
 	
 	table.insert(forms, self.TeamInfos)
