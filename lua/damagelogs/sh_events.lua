@@ -5,7 +5,7 @@ function Damagelog:AddEvent(event, f)
 	local id = #self.events + 1
 
 	function event.CallEvent(tbl, force_time, force_index)
-		if GetRoundState() != ROUND_ACTIVE then return end
+		if ( JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST ) then return end
 		self:CheckDamageTable()
 		local time
 		if force_time then

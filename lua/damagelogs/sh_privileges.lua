@@ -2,9 +2,9 @@
 
 local function checkSettings(self, value)
 	if value == 1 or value == 2 then
-		return GetRoundState() != ROUND_ACTIVE
+		return ( JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST )
 	elseif value == 3 then
-		return GetRoundState() != ROUND_ACTIVE or self:IsSpec()
+		return ( JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST ) or self:IsSpec()
 	elseif value == 4 then
 		return true
 	end

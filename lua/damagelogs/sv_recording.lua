@@ -19,7 +19,7 @@ end)
 
 timer.Create("SpecDM_Recording", 0.2, 0, function()
 
-	if not GetRoundState or GetRoundState() != ROUND_ACTIVE then return end
+	if ( JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST ) then return end
 
 	if #Damagelog.Records >= 50 then
 		table.remove(Damagelog.Records, 1)
