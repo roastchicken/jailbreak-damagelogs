@@ -1,3 +1,5 @@
+--https://github.com/garrynewman/garrysmod/blob/ead2b4d7f05681e577935fef657d4a4d962091e6/garrysmod/gamemodes/terrortown/gamemode/vgui/coloredbox.lua
+
 -- Removed in GM13, still need it
 local PANEL = {}
 AccessorFunc( PANEL, "m_bBorder", "Border" )
