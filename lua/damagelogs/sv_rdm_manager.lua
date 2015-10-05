@@ -178,7 +178,7 @@ net.Receive("DL_ReportPlayer", function(_len, ply)
 	Damagelog.Reports.Current[index].index = index
 	for k,v in pairs(player.GetHumans()) do
 		if v:CanUseRDMManager() then
-			if v:IsActive() then
+			if v:Alive() then
 				v:Damagelog_Notify(DAMAGELOG_NOTIFY_ALERT, "A new report has been created! (#"..index..") !", 5, "ui/vote_failure.wav")
 			else
 				v:Damagelog_Notify(DAMAGELOG_NOTIFY_ALERT, ply:Nick().." has reported "..attacker:Nick().. " (#"..index..") !", 5, "ui/vote_failure.wav")
@@ -290,7 +290,7 @@ net.Receive("DL_SendAnswer", function(_, ply)
 	tbl.status = RDM_MANAGER_WAITING_FOR_VICTIM
 	for k,v in pairs(player.GetHumans()) do
 		if v:CanUseRDMManager() then
-			v:Damagelog_Notify(DAMAGELOG_NOTIFY_INFO, (v:IsActive() and "The reported player " or ply:Nick()).." has answered to the report #"..index.."!", 5, "ui/vote_yes.wav")
+			v:Damagelog_Notify(DAMAGELOG_NOTIFY_INFO, (v:Alive() and "The reported player " or ply:Nick()).." has answered to the report #"..index.."!", 5, "ui/vote_yes.wav")
 			v:UpdateReport(previous, index)
 		end
 	end
@@ -323,13 +323,13 @@ net.Receive("DL_GetForgive", function(_, ply)
 	for k,v in pairs(player.GetHumans()) do
 		if v:CanUseRDMManager() then	
 			if forgive then
-				if v:IsActive() then
+				if v:Alive() then
 					v:Damagelog_Notify(DAMAGELOG_NOTIFY_INFO, "The report #"..index.." has been canceled by the victim!", 5, "ui/vote_yes.wav")
 				else
 					v:Damagelog_Notify(DAMAGELOG_NOTIFY_INFO, ply:Nick().." has canceled the report #"..index.." !", 5, "ui/vote_yes.wav")
 				end
 			else
-				if v:IsActive() then
+				if v:Alive() then
 					v:Damagelog_Notify(DAMAGELOG_NOTIFY_INFO, "The victim did not forgive the attacker on the report #"..index.." !", 5, "ui/vote_yes.wav")
 				else
 					v:Damagelog_Notify(DAMAGELOG_NOTIFY_INFO, ply:Nick().." did not forgive "..tbl.attacker_nick.." on the report #"..index.." !", 5, "ui/vote_yes.wav")

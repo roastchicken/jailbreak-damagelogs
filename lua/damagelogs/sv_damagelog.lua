@@ -221,7 +221,7 @@ function Damagelog:TransferLogs(damage_send, ply, round, teams, current)
 			table.insert(superadmins, v)
 		end
 	end
-	if current and ply:IsActive() then
+	if current and ply:Alive() then
 		net.Start("DL_InformSuperAdmins")
 		net.WriteString(ply:Nick())
 		net.Send(self.AbuseMessageMode == 1 and superadmins or self.AbuseMessageMode == 2 and player.GetAll() or {})

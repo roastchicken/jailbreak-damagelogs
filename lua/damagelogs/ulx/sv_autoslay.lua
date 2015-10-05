@@ -179,7 +179,7 @@ end
 
 hook.Add("TTTBeginRound", "Damagelog_AutoSlay", function()
 	for k,v in pairs(player.GetAll()) do
-		if v:IsActive() then
+		if v:Alive() then
 			timer.Simple(1, function()
 				v:SetNWBool("PlayedSRound", true)
 			end)

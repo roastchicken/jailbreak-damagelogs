@@ -288,7 +288,7 @@ end)
 net.Receive("DL_SendReport", function()
 	local report = net.ReadTable()
 	table.insert(Damagelog.ReportsQueue, report)
-	if not LocalPlayer().IsActive or not LocalPlayer():IsActive() then
+	if not LocalPlayer():Alive() then
 		BuildReportFrame(report)
 	end
 end)
@@ -343,7 +343,7 @@ end)
 net.Receive("DL_Answering_global", function(_len)
 	local nick = net.ReadString()
 	local ply = LocalPlayer()
-	if not ply:IsActive() then
+	if not ply:Alive() then
 		chat.AddText(Color(255,62,62), nick, color_white, " is answering to their reports.")
 	end
 end)

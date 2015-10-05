@@ -34,7 +34,7 @@ timer.Create("SpecDM_Recording", 0.2, 0, function()
 	end
 
 	for k,v in pairs(player.GetAll()) do
-		if not v:IsActive() then 
+		if not v:Alive() then 
 			local rag = v.server_ragdoll
 			if IsValid(rag) then
 				local pos,ang = rag:GetPos(), rag:GetAngles()
