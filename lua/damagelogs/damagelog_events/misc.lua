@@ -1,7 +1,7 @@
 
 if SERVER then
 	Damagelog:EventHook("TTTPlayerDisguised")
-	Damagelog:EventHook("TTTBeginRound")
+	Damagelog:EventHook("JailBreakRoundStart")
 	Damagelog:EventHook("TTTC4Disarm")
 	Damagelog:EventHook("TTTC4Destroyed")
 	Damagelog:EventHook("TTTC4Pickup")
@@ -91,7 +91,7 @@ function event:TTTC4Destroyed(ply, bomb)
 	})
 end
 
-function event:TTTBeginRound()
+function event:JailBreakRoundStart()
 	for k,v in pairs(player.GetAll()) do
 		if v.NoDisguise then 
 			v.NoDisguise = false

@@ -9,7 +9,7 @@ Damagelog.SceneID = Damagelog.SceneID or 0
 
 local magneto_ents = {}
 
-hook.Add("TTTBeginRound", "TTTBeginRound_SpecDMRecord", function()
+hook.Add("JailBreakRoundStart", "JailBreakRoundStart_SpecDMRecord", function()
 	table.Empty(magneto_ents)
 	table.Empty(Damagelog.Records)
 	for k,ply in pairs(player.GetAll()) do

@@ -98,7 +98,7 @@ hook.Add("PlayerSay", "Damagelog_RDMManager", function(ply, text, teamOnly)
 	end
 end)
 
-hook.Add("TTTBeginRound", "Damagelog_RDMManger", function()
+hook.Add("JailBreakRoundStart", "Damagelog_RDMManger", function()
 	for k,v in pairs(player.GetHumans()) do
 		if not v.CanReport then
 			v.CanReport = true

@@ -459,7 +459,7 @@ end)
 
 local drawing = false
 
-hook.Add("TTTBeginRound", "Damagelog_Chat", function()
+hook.Add("JailBreakRoundStart", "Damagelog_Chat", function()
 	drawing = false
 end)
 

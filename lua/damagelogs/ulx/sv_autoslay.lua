@@ -177,7 +177,7 @@ function Damagelog:SetSlays(admin, steamid, slays, reason, target)
 	end
 end
 
-hook.Add("TTTBeginRound", "Damagelog_AutoSlay", function()
+hook.Add("JailBreakRoundStart", "Damagelog_AutoSlay", function()
 	for k,v in pairs(player.GetAll()) do
 		if v:Alive() then
 			timer.Simple(1, function()
