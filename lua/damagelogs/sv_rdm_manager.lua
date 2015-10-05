@@ -269,7 +269,7 @@ hook.Add("PlayerDeath", "RDM_Manager", function(ply)
 	net.Send(ply)
 end)
 
-hook.Add("TTTEndRound", "RDM_Manager", function()
+hook.Add("JailBreakRoundEnd", "RDM_Manager", function()
 	for k,v in pairs(player.GetAll()) do
 		net.Start("DL_Death")
 		net.Send(v)
