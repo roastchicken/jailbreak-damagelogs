@@ -1,5 +1,6 @@
 include("damagelogs/config/config.lua")
 include("damagelogs/not_my_code/coloredbox.lua")
+include("damagelogs/not_my_code/util.lua")
 include("damagelogs/cl_tabs/damagetab.lua")
 include("damagelogs/cl_tabs/settings.lua")
 include("damagelogs/cl_tabs/shoots.lua")

@@ -1,5 +1,6 @@
 AddCSLuaFile("damagelogs/cl_damagelog.lua")
 AddCSLuaFile("damagelogs/not_my_code/coloredbox.lua")
+AddCSLuaFile("damagelogs/not_my_code/util.lua")
 AddCSLuaFile("damagelogs/cl_tabs/damagetab.lua")
 AddCSLuaFile("damagelogs/cl_tabs/settings.lua")
 AddCSLuaFile("damagelogs/cl_tabs/shoots.lua")
