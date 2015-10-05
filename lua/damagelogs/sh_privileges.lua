@@ -2,9 +2,9 @@
 
 local function checkSettings(self, value)
 	if value == 1 or value == 2 then
-		return ( JB.State != STATE_SETUP or JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST )
+		return not ( JB.State == STATE_SETUP or JB.State == STATE_PLAYING or JB.State == STATE_LASTREQUEST )
 	elseif value == 3 then
-		return ( JB.State != STATE_SETUP or JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST ) or self:Team() == TEAM_SPECTATOR
+		return not ( JB.State == STATE_SETUP or JB.State == STATE_PLAYING or JB.State == STATE_LASTREQUEST ) or self:Team() == TEAM_SPECTATOR
 	elseif value == 4 then
 		return true
 	end

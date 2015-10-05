@@ -31,7 +31,7 @@ function event:DoPlayerDeath(ply, attacker, dmginfo)
 				Damagelog.Death_Scenes[scene] = table.Copy(Damagelog.Records)
 			end)
 		end
-		if ( JB.State != STATE_SETUP or JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST ) then
+		if not ( JB.State == STATE_SETUP or JB.State == STATE_PLAYING or JB.State == STATE_LASTREQUEST ) then
 			net.Start("DL_Ded")
 			if tbl[2] == TEAM_PRISOER and tbl[4] == TEAM_GUARD then
 				net.WriteUInt(0,1)

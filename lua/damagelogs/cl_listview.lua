@@ -159,7 +159,7 @@ function Damagelog:AddTeamLine(listview, nick, team)
 	local sync_ent = self:GetSyncEnt()
 	item.Think = function(panel)
 		local ent = self.TeamNicks and self.TeamNicks[panel.Nick]
-		if ( JB.State != STATE_SETUP or JB.State != STATE_PLAYING or JB.State != STATE_LASTREQUEST ) and sync_ent:GetPlayedRounds() == panel.Round then
+		if not ( JB.State == STATE_SETUP or JB.State == STATE_PLAYING or JB.State == STATE_LASTREQUEST ) and sync_ent:GetPlayedRounds() == panel.Round then
 			if IsValid(ent) then
 				panel:SetColumnText(3, ent:Alive() and not (ent.IsGhost and ent:IsGhost()) and not ent:Team() == TEAM_SPECTATOR and "Yes" or "No")
 			else
