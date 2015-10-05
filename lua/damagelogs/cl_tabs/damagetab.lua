@@ -318,7 +318,7 @@ function Damagelog:DrawDamageTab(x, y)
 			end
 			LastChoise = LastChoise + 1
 		end
-		if not LocalPlayer():CanUseDamagelog() or (GetConVar("ttt_dmglogs_currentround"):GetBool() or not LocalPlayer():IsActive()) then
+		if not LocalPlayer():CanUseDamagelog() or (GetConVar("ttt_dmglogs_currentround"):GetBool() or not LocalPlayer():Alive()) then
 			self.Round:ChooseOptionID(LastChoise)
 				else
 			self.Round:ChooseOptionID(LastChoise-1 > 0 and LastChoise-1 or LastChoise)
