@@ -40,7 +40,7 @@ end
 	 
 function Damagelog:DamagelogInfos()
 	for k,v in pairs(weapons.GetList()) do		
-		if v.Base == "weapon_tttbase" then
+		if v.Base == "weapon_jb_base" then
 			if not v.PrimaryAttack then
 				v.PrimaryAttack = function(wep)
 					wep.BaseClass.PrimaryAttack(wep)
