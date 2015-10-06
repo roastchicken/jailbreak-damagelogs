@@ -14,14 +14,16 @@ event.Type = "DMG"
 event.IsDamage = true
 
 function event:Initialize()
-	local old_func = GAMEMODE.PlayerTakeDamage
-	function GAMEMODE:PlayerTakeDamage(ent, infl, att, amount, dmginfo)
-		local original_dmg = dmginfo:GetDamage()
-
-		old_func(self, ent, infl, att, amount, dmginfo)
-
-		hook.Call("PlayerTakeRealDamage", GAMEMODE, ent, dmginfo, original_dmg)
-	end
+  local old_func = JB.Gamemode.EntityTakeDamage
+  function GAMEMODE:EntityTakeDamage( ent, dmginfo )
+    MsgN( "entity took damage" )
+    
+    old_func( GAMEMODE, ent, dmginfo )
+    
+    if not IsValid( ent ) or not ent:IsPlayer() then return end
+    
+    hook.Call("PlayerTakeRealDamage", GAMEMODE, ent, dmginfo, dmginfo:GetDamage())
+  end
 end
 
 function event:PlayerTakeRealDamage(ent, dmginfo, original_dmg)
