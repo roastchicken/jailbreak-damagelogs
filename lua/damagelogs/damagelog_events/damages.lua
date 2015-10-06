@@ -16,7 +16,6 @@ event.IsDamage = true
 function event:Initialize()
   local old_func = JB.Gamemode.EntityTakeDamage
   function GAMEMODE:EntityTakeDamage( ent, dmginfo )
-    MsgN( "entity took damage" )
     
     old_func( GAMEMODE, ent, dmginfo )
     
