@@ -2,7 +2,7 @@ if SERVER then
 	Damagelog:EventHook("DoPlayerDeath")
 else
 	Damagelog:AddFilter("Show kills", DAMAGELOG_FILTER_BOOL, true)
-	Damagelog:AddColor("Teamkills", Color(255, 40, 40))
+	Damagelog:AddColor("Possible RDM Kills", Color(255, 40, 40))
 	Damagelog:AddColor("Kills", Color(255, 128, 0, 255))
 end
 
@@ -69,8 +69,8 @@ end
 
 function event:GetColor(tbl)
 	
-	if Damagelog:IsTeamkill(tbl[2], tbl[4]) then
-		return Damagelog:GetColor("Teamkills")
+	if Damagelog:PossibleRDM( tbl[4] ) then
+		return Damagelog:GetColor("Possible RDM Kills")
 	else
 		return Damagelog:GetColor("Kills")
 	end

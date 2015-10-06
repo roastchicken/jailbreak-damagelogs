@@ -3,7 +3,6 @@ if SERVER then
 	Damagelog:EventHook("EntityTakeDamage")
 else
 	Damagelog:AddFilter("Show fall damage", DAMAGELOG_FILTER_BOOL, false)
-	Damagelog:AddColor("Team Damage", Color(255, 40, 40))
 	Damagelog:AddColor("Fall Damage", Color(0, 0, 0))
 end
 
@@ -71,11 +70,7 @@ function event:Highlight(line, tbl, text)
 end
 
 function event:GetColor(tbl)
-	if tbl[5] and Damagelog:IsTeamkill(tbl[2], tbl[7]) then
-		return Damagelog:GetColor("Team Damage")
-	else
-		return Damagelog:GetColor("Fall Damage")
-	end
+  return Damagelog:GetColor("Fall Damage")
 end
 
 function event:RightClick(line, tbl, text)

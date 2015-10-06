@@ -67,11 +67,11 @@ if SERVER then
 	
 end
 
-function Damagelog:IsTeamkill(team1, team2)
-	if team1 == team2 then 
-		return true
+function Damagelog:PossibleRDM( entTeam )
+	if entTeam == TEAM_GUARD then
+		return false
 	end
-	return false
+	return true
 end
 
 local function includeEventFile(f)

@@ -4,7 +4,7 @@ if SERVER then
 	Damagelog:EventHook("PlayerTakeRealDamage")
 else
 	Damagelog:AddFilter("Show damage", DAMAGELOG_FILTER_BOOL, true)
-	Damagelog:AddColor("Team Damage", Color(255, 40, 40))
+	Damagelog:AddColor("Possible RDM Damage", Color(255, 40, 40))
 	Damagelog:AddColor("Damage", Color(0, 0, 0))
 end
 
@@ -42,7 +42,7 @@ function event:PlayerTakeRealDamage(ent, dmginfo, original_dmg)
 				[8] = att:SteamID(), 
 				[9] = math.Round(original_dmg)
 			}
-			if Damagelog:IsTeamkill(tbl[2], tbl[4]) then
+			if Damagelog:PossibleRDM( tbl[2] ) then
 				tbl.icon = { "icon16/exclamation.png" }
 			elseif Damagelog.Time then
 				local found_dmg = false
@@ -112,8 +112,8 @@ end
 
 function event:GetColor(tbl)
 	
-	if Damagelog:IsTeamkill(tbl[2], tbl[4]) then
-		return Damagelog:GetColor("Team Damage")
+	if Damagelog:PossibleRDM( tbl[2] ) then
+		return Damagelog:GetColor("Possible RDM Damage")
 	else
 		return Damagelog:GetColor("Damage")
 	end
